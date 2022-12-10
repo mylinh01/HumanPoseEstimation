@@ -5,3 +5,5 @@ tensorflow-gpu==2.4.1
 tensorflow-hub 
 opencv-python 
 matplotlib
+Pillow
+tempfile
