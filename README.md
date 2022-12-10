@@ -1,2 +1,4 @@
 # Project_BDAS436177
-lệnh chạy: streamlit run app.py
+lệnh chạy: 
+- pip install -r requirements.txt
+- streamlit run app.py
