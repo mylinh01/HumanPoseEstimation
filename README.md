@@ -27,6 +27,7 @@ Trình trích xuất tính năng trong MoveNet là MobileNetV2 với mạng kim 
 -	Keypoint regression field: dự đoán tập hợp đầy đủ các điểm chính cho một người, được sử dụng để nhóm các điểm chính thành các phiên bản
 -	Person keypoint heatmap: dự đoán vị trí của tất cả các điểm chính, không phụ thuộc vào phiên bản người
 -	2D per-keypoint offset field: dự đoán độ lệch cục bộ từ từng pixel bản đồ tính năng đầu ra đến vị trí pixel phụ chính xác của từng điểm chính
+
 ![image](https://github.com/mylinh01/HumanPoseEstimation/assets/91240116/c0737afa-c648-4703-b3fa-fb5469f06391)
 Hình 1.1. Kiến trúc MoveNet
 
