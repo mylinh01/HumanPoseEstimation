@@ -23,18 +23,22 @@ MoveNet là một mô hình ước tính từ dưới lên, sử dụng bản đ
 
 Trình trích xuất tính năng trong MoveNet là MobileNetV2 với mạng kim tự tháp tính năng (FPN) được đính kèm, cho phép tạo ra bản đồ tính năng có độ phân giải cao. Có bốn đầu dự đoán được gắn vào trình trích xuất đặc trưng, chịu trách nhiệm dự đoán:
 
- -	Person center heatmap: dự đoán trung tâm hình học của các phiên bản người
+-	Person center heatmap: dự đoán trung tâm hình học của các phiên bản người
 -	Keypoint regression field: dự đoán tập hợp đầy đủ các điểm chính cho một người, được sử dụng để nhóm các điểm chính thành các phiên bản
 -	Person keypoint heatmap: dự đoán vị trí của tất cả các điểm chính, không phụ thuộc vào phiên bản người
 -	2D per-keypoint offset field: dự đoán độ lệch cục bộ từ từng pixel bản đồ tính năng đầu ra đến vị trí pixel phụ chính xác của từng điểm chính
 
 ![image](https://github.com/mylinh01/HumanPoseEstimation/assets/91240116/c0737afa-c648-4703-b3fa-fb5469f06391)
+
 Hình 1.1. Kiến trúc MoveNet
 
 Mặc dù những dự đoán này được tính toán song song, nhưng người ta có thể hiểu rõ hơn về hoạt động của mô hình bằng cách xem xét chuỗi hoạt động sau:
+
 Bước 1: Bản đồ nhiệt trung tâm người được sử dụng để xác định trung tâm của tất cả các cá nhân trong khung, được định nghĩa là trung bình cộng của tất cả các điểm chính thuộc về một người. Vị trí có điểm số cao nhất (có trọng số theo khoảng cách nghịch đảo từ trung tâm khung) được chọn.
+
 Bước 2: Tập hợp các điểm chính ban đầu cho người được tạo bằng cách cắt đầu ra hồi quy điểm chính từ pixel tương ứng với trung tâm đối tượng. Vì đây là một dự đoán trung tâm – phải hoạt động trên các quy mô khác nhau – nên chất lượng của các điểm chính hồi quy sẽ không chính xác lắm.
 Bước 3: Mỗi pixel trong bản đồ nhiệt của điểm chính được nhân với trọng số tỷ lệ nghịch với khoảng cách từ điểm chính hồi quy tương ứng. Điều này đảm bảo rằng chúng tôi không chấp nhận các điểm chính từ những người trong nền, vì chúng thường sẽ không ở gần các điểm chính bị hồi quy và do đó sẽ có điểm số thấp.
+
 Bước 4: Tập hợp dự đoán điểm chính cuối cùng được chọn bằng cách truy xuất tọa độ của các giá trị bản đồ nhiệt tối đa trong mỗi kênh điểm chính. Sau đó, các dự đoán độ lệch 2D cục bộ được thêm vào các tọa độ này để đưa ra các ước tính tinh chỉnh. Xem hình bên dưới minh họa bốn bước này.
  ## 3. Xây dựng ứng dụng
  ### 3.1. Xây dựng ứng dụng
@@ -66,6 +70,17 @@ Một tensor float32 có dạng [1, 6, 56].
 #### Lặp lại các bước cho từng đối tượng
 ![image](https://github.com/mylinh01/HumanPoseEstimation/assets/91240116/10244f5f-1424-4130-be51-22f94789c845)
 ### 3.2. Kết quả
+Kết quả trên local
 ![image](https://github.com/mylinh01/HumanPoseEstimation/assets/91240116/e036d27e-1581-4419-8b95-cc5782d154b1)
+
+Sử dụng streamlit để xây dựng web app ước tính tư thế nhiều người theo thời gian thực
+
+Input có thể chọn là Video để load video hoặc Webcam
+![image](https://github.com/mylinh01/HumanPoseEstimation/assets/91240116/05bea538-3678-4f4f-bcea-d241a38a5f22)
+
+Output là video ước tính tư thế nhiều người theo thời gian thực
+![image](https://github.com/mylinh01/HumanPoseEstimation/assets/91240116/7c4759bf-f4aa-46c9-bb57-e06b138aac31)
+
+
 
 
