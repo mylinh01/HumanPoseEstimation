@@ -76,7 +76,9 @@ Kết quả trên local
 Sử dụng streamlit để xây dựng web app ước tính tư thế nhiều người theo thời gian thực
 
 Input có thể chọn là Video để load video hoặc Webcam
+
 ![image](https://github.com/mylinh01/HumanPoseEstimation/assets/91240116/05bea538-3678-4f4f-bcea-d241a38a5f22)
+
 
 Output là video ước tính tư thế nhiều người theo thời gian thực
 ![image](https://github.com/mylinh01/HumanPoseEstimation/assets/91240116/7c4759bf-f4aa-46c9-bb57-e06b138aac31)
